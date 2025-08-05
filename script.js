@@ -11,29 +11,43 @@ window.onload = (event) => {
     }
 };
 
+
   function discar(){
       document.getElementById('check').value = '1';
+      console.log('Discar = 1');
   }
-  function salvar(){
+
+  function salvar(event){
+    const form = document.getElementById('formulario');
+
+    if (!form.reportValidity()) {
+        // Se o formulário for inválido, previne o submit
+        event.preventDefault();
+        return;
+    }
+    
+    // Se for válido, atualiza o campo e deixa submeter normalmente
     document.getElementById('check').value = '0';
-  
+    console.log('Formulário salvo com sucesso!');
+    // não chama event.preventDefault(), o submit segue
   }
 
   function btnConfig(value){
       
       if (value == ''){
-        
         document.getElementById('btnPhone').disabled = true;
+        document.getElementById('btnPhone2').disabled = true;
       } else {
         document.getElementById('btnPhone').removeAttribute('disabled');
+        document.getElementById('btnPhone2').removeAttribute('disabled');
       }
   }
 
-  function get_details(){
+  function get_details(event){
     document.getElementById('formatacao').value = '';
     document.getElementById('numeroDigitos').value = '';
     
-    var val = document.getElementById("ddi1").value;
+    var val = event.target.value;
           
     switch (val) {
       //Alemanha
